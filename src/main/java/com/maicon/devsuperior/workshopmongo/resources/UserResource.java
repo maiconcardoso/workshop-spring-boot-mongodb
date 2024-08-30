@@ -1,8 +1,7 @@
 package com.maicon.devsuperior.workshopmongo.resources;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,8 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.maicon.devsuperior.workshopmongo.domain.User;
 import com.maicon.devsuperior.workshopmongo.dto.UserDto;
 import com.maicon.devsuperior.workshopmongo.services.UserService;
-
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/users")
