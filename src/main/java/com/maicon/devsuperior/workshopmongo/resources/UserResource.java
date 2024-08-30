@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.maicon.devsuperior.workshopmongo.domain.User;
+import com.maicon.devsuperior.workshopmongo.dto.UserDto;
 import com.maicon.devsuperior.workshopmongo.services.UserService;
+
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/users")
@@ -22,8 +25,9 @@ public class UserResource {
     private UserService service;
 
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<User>> findAll() {
+    public ResponseEntity<List<UserDto>> findAll() {
         List<User> list = service.findAll();        
-        return ResponseEntity.status(HttpStatus.OK).body(list);
+        List<UserDto> listDto = list.stream().map((x) -> new UserDto(x)).collect(Collectors.toList());
+        return ResponseEntity.status(HttpStatus.OK).body(listDto);
     }
 }
