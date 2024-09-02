@@ -42,4 +42,10 @@ public class UserResource {
         user = service.insert(user);
         return ResponseEntity.status(HttpStatus.CREATED).body(user);
     }
+
+    @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<Void> delete(@PathVariable String id) {
+        service.delete(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
 }
