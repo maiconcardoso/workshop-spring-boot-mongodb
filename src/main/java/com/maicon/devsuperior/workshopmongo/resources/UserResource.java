@@ -48,4 +48,12 @@ public class UserResource {
         service.delete(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
+
+    @RequestMapping(value =  "{id}", method = RequestMethod.PUT)
+    public ResponseEntity<UserDto> update(@PathVariable String id, @RequestBody UserDto objDto) {
+        User user = service.fromDto(objDto);
+        user.setId(id);
+        user = service.update(user);
+        return ResponseEntity.status(HttpStatus.OK).body(new UserDto(user));
+    }
 }

@@ -23,7 +23,7 @@ public class UserService {
 
     public User findById(String id) {
         Optional<User> user = repository.findById(id);
-        if (!user.isPresent()) {
+        if (!user.isPresent() || id == null) {
             throw new ObjectNotFoundException("Object Not Found!");
         }
         return user.get();
@@ -36,6 +36,17 @@ public class UserService {
     public void delete(String id) {
         findById(id);
         repository.deleteById(id);
+    }
+
+    public User update(User obj) {
+        User newObj = findById(obj.getId());
+        updateUser(newObj, obj);
+        return repository.save(newObj);
+    }
+
+    private void updateUser(User newObj, User obj) {
+        newObj.setName(obj.getName());
+        newObj.setEmail(obj.getEmail());
     }
 
     public User fromDto(UserDto objDto) {
