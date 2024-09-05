@@ -1,13 +1,14 @@
 package com.maicon.devsuperior.workshopmongo.services;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.maicon.devsuperior.workshopmongo.domain.Post;
 import com.maicon.devsuperior.workshopmongo.repository.PostRepository;
 import com.maicon.devsuperior.workshopmongo.services.exceptions.ObjectNotFoundException;
-
-import java.util.Optional;
 
 @Service
 public class PostService {
@@ -21,5 +22,9 @@ public class PostService {
             throw new ObjectNotFoundException("Object not found!");
         }
         return post;
+    }
+
+    public List<Post> findByTitle(String text) {
+        return repository.findByTitleContainingIgnoreCase(text);
     }
 }
